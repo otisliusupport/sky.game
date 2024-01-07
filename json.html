@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON转化-OLSdeveloper</title>
+    <style>
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+    text-align: center; /* Center align content */
+}
+
+h1 {
+    color: #0070c9;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 8px;
+    background-color: #0070c9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005689;
+}
+
+#output {
+    margin: 0 auto; /* Center align the output div */
+    max-width: 600px; /* Set a maximum width for better readability */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #0070c9;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #555;
+    margin-top: 15px;
+}
+
+p {
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>光遇用户数据格式转换</h1>
+    <h2></h2>
+    <form id="inputForm">
+        <label for="userData">输入用户数据JSON:</label>
+        <textarea id="userData" rows="10" cols="50"></textarea>
+        <br>
+        <br>
+        <button type="button" onclick="generateInfo()">点此转化</button>
+    </form>
+
+    <div id="output"></div>
+<br>
+<br>
+    <p>OLS &copy; 2024版权所有
+        <br>
+        站点: tools.otisliu.top/json.html
+        <br>
+        邮箱: noreply@otisliu.top
+    </p>
+    <script>
+        function generateInfo() {
+            var userData = document.getElementById("userData").value;
+
+            var codeMatch = userData.match(/"code":\s*([-\d]+)/);
+            var timeMatch = userData.match(/"time":\s*"([^"]+)"/);
+            var scaleMatch = userData.match(/"scale":\s*"([^"]+)"/);
+            var heightMatch = userData.match(/"height":\s*"([^"]+)"/);
+            var currentHeightMatch = userData.match(/"currentHeight":\s*([-\d.]+)/);
+            var maxHeightMatch = userData.match(/"maxHeight":\s*([-\d.]+)/);
+            var minHeightMatch = userData.match(/"minHeight":\s*([-\d.]+)/);
+            var cloakMatch = userData.match(/"cloak":\s*"([^"]+)"/);
+            var propMatch = userData.match(/"prop":\s*"([^"]+)"/);
+            var neckMatch = userData.match(/"neck":\s*"([^"]+)"/);
+            var maskMatch = userData.match(/"mask":\s*"([^"]+)"/);
+            var hornMatch = userData.match(/"horn":\s*"([^"]+)"/);
+            var hairMatch = userData.match(/"hair":\s*"([^"]+)"/);
+            var pantsMatch = userData.match(/"pants":\s*"([^"]+)"/);
+            var voiceMatch = userData.match(/"voice":\s*"([^"]+)"/);
+            var attitudeMatch = userData.match(/"attitude":\s*"([^"]+)"/);
+
+            var outputHtml = `
+                <div style="background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                    <h2>状态: ${codeMatch ? codeMatch[1] : 'N/A'}</h2>
+                    <p>时间: ${timeMatch ? timeMatch[1] : 'N/A'}</p>
+                    <p>S值: ${scaleMatch ? scaleMatch[1] : 'N/A'}</p>
+                    <p>H值: ${heightMatch ? heightMatch[1] : 'N/A'}</p>
+                    <p>当前身高: ${currentHeightMatch ? currentHeightMatch[1] : 'N/A'}</p>
+                    <p>最高: ${maxHeightMatch ? maxHeightMatch[1] : 'N/A'}</p>
+                    <p>最低: ${minHeightMatch ? minHeightMatch[1] : 'N/A'}</p>
+                    <h3>装扮:</h3>
+                    <p>斗篷: ${cloakMatch ? cloakMatch[1] : 'N/A'}</p>
+                    <p>装备: ${propMatch ? propMatch[1] : 'N/A'}</p>
+                    <p>项链: ${neckMatch ? neckMatch[1] : 'N/A'}</p>
+                    <p>面具: ${maskMatch ? maskMatch[1] : 'N/A'}</p>
+                    <p>头饰: ${hornMatch ? hornMatch[1] : 'N/A'}</p>
+                    <p>发型: ${hairMatch ? hairMatch[1] : 'N/A'}</p>
+                    <p>裤子: ${pantsMatch ? pantsMatch[1] : 'N/A'}</p>
+                    <h3>状态:</h3>
+                    <p>叫声: ${voiceMatch ? voiceMatch[1] : 'N/A'}</p>
+                    <p>姿势: ${attitudeMatch ? attitudeMatch[1] : 'N/A'}</p>
+                </div>
+            `;
+
+            document.getElementById("output").innerHTML = outputHtml;
+        }
+    </script>
+</body>
+</html>
